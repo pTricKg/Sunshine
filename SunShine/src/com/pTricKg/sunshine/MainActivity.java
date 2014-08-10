@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
@@ -82,6 +83,9 @@ public class MainActivity extends ActionBarActivity {
 					              R.id.list_item_forecast_textview,
 					              // forecast data
 					              weekForecast);
+			// Get reference to find listview and attach to adapter
+			ListView lst = (ListView) rootView.findViewById(R.id.listview_forecast);
+			lst.setAdapter(mForecastAdapter);
 					
 
 			return rootView;
