@@ -1,5 +1,9 @@
 package com.pTricKg.sunshine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -9,18 +13,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
+
+	public static ArrayAdapter<String> mForecastAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		if (savedInstanceState == null) {
-//			getSupportFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment()).commit();
-//		}
+		// if (savedInstanceState == null) {
+		// getSupportFragmentManager().beginTransaction()
+		// .add(R.id.container, new PlaceholderFragment()).commit();
+		// }
 	}
 
 	@Override
@@ -55,19 +62,29 @@ public class MainActivity extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
-			
+
 			// Dummy data for listview
-			String[] forecastArray = {
-					"Today - Sunny - 88 / 63",
-					"Tomorrow - Foggy - 70 / 63" ,
-					"Weds - Cloudy - 72 / 63",
+			String[] forecastArray = { "Today - Sunny - 88 / 63",
+					"Tomorrow - Foggy - 70 / 63", "Weds - Cloudy - 72 / 63",
 					"Thurs - Asteroids - 75 / 65",
 					"Fri - Heavy Rain - 65 / 54",
-					"Sat - Nuclear Fallout - 59 / 28",
-					"Sun - Sunny - 80 / 68"
-					};
-						
-							return rootView;
+					"Sat - Nuclear Fallout - 59 / 28", "Sun - Sunny - 80 / 68" };
+			
+			// create addapter
+			List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
+			
+			mForecastAdapter = new ArrayAdapter<String>(
+					// context
+					getActivity(),
+					              // id list item
+					              R.layout.list_item_forecast,
+					              // textview to populate
+					              R.id.list_item_forecast_textview,
+					              // forecast data
+					              weekForecast);
+					
+
+			return rootView;
 		}
 	}
 }
