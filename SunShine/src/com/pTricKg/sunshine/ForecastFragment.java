@@ -49,15 +49,17 @@ public class ForecastFragment extends Fragment {
 		// create adapter
 		List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
 		
+		// populate data to list view from dummy data
 		mForecastAdapter = new ArrayAdapter<String>(
 				// context
 				getActivity(),
-				              // id list item
-				              R.layout.list_item_forecast,
-				              // textview to populate
-				              R.id.list_item_forecast_textview,
-				              // forecast data
-				              weekForecast);
+				// id list item
+				R.layout.list_item_forecast,
+				// textview to populate
+				R.id.list_item_forecast_textview,
+				// forecast data
+			    weekForecast);
+		
 		// Get reference to find listview and attach to adapter
 		ListView lst = (ListView) rootView.findViewById(R.id.listview_forecast);
 		lst.setAdapter(mForecastAdapter);
