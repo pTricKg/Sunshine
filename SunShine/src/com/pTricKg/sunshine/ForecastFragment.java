@@ -36,13 +36,17 @@ public class ForecastFragment extends Fragment {
 				false);
 
 		// Dummy data for listview
-		String[] forecastArray = { "Today - Sunny - 88 / 63",
-				"Tomorrow - Foggy - 70 / 63", "Weds - Cloudy - 72 / 63",
+		String[] forecastArray = { 
+				"Today - Sunny - 88 / 63",
+				"Tomorrow - Foggy - 70 / 63",
+				"Weds - Cloudy - 72 / 63",
 				"Thurs - Asteroids - 75 / 65",
 				"Fri - Heavy Rain - 65 / 54",
-				"Sat - Nuclear Fallout - 59 / 28", "Sun - Sunny - 80 / 68" };
+				"Sat - Nuclear Fallout - 59 / 28",
+				"Sun - Sunny - 80 / 68" 
+				};
 		
-		// create addapter
+		// create adapter
 		List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
 		
 		mForecastAdapter = new ArrayAdapter<String>(
