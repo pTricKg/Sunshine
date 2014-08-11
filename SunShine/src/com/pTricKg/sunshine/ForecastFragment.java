@@ -76,6 +76,10 @@ public class ForecastFragment extends Fragment {
 		
 		protected Void doInBackground(Void... params) {
 			
+			/** 
+			 * Below is from OpenWeather API
+			 *   */
+			
 			// These two need to be declared outside the try/catch
 			// so that they can be closed in the finally block.
 			HttpURLConnection urlConnection = null;
