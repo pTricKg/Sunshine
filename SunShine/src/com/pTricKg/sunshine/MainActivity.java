@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		 if (savedInstanceState == null) {
 		 getSupportFragmentManager().beginTransaction()
-		 .add(R.id.container, new PlaceholderFragment()).commit();
+		 .add(R.id.container, new ForecastFragment()).commit();
 		 }
 	}
 
@@ -58,9 +58,9 @@ public class MainActivity extends ActionBarActivity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class ForecastFragment extends Fragment {
 
-		public PlaceholderFragment() {
+		public ForecastFragment() {
 		}
 
 		@Override
