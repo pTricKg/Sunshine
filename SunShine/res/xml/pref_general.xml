@@ -9,5 +9,12 @@
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
         android:singleLine="true" />
+    
+    <EditTextPreference
+        android:title="@string/pref_temperature_label"
+        android:key="@string/pref_location_key"
+        android:defaultValue="@string/pref_temperature_default"
+        android:inputType="text"
+        android:singleLine="true" />
 
 </PreferenceScreen>
