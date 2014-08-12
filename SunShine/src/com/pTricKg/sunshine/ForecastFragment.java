@@ -1,6 +1,7 @@
 
 package com.pTricKg.sunshine;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -107,7 +108,9 @@ public class ForecastFragment extends Fragment {
 					int i, long l) {
 				String forecast = mForecastAdapter.getItem(i); // pull from adapter
 				Toast.makeText(getActivity(), forecast, Toast.LENGTH_LONG).show();
-				
+				Intent intent = new Intent(getActivity(), DetailActivity.class)
+				.putExtra(Intent.EXTRA_TEXT, forecast);
+				startActivity(intent);
 			}
         	
         });
