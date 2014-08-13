@@ -90,6 +90,7 @@ public class WeatherContract {
         }
   
     }
+
         
         // Location
         /* Inner class that defines the table contents of the location table */

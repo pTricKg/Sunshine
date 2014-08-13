@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
 import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
-import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry.LocationEntry;
 
 /**
  * Manages a local database for weather data.
