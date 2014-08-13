@@ -1,11 +1,24 @@
 package com.pTricKg.sunshine.data;
 
+import java.net.URI;
+
 import android.provider.BaseColumns;
 
 /**
  * Defines table and column names for the weather database.
  */
 public class WeatherContract {
+	
+	// Content Authority
+	public static final String CONTENT_AUTHORITY = "com.pTricKg.sunshine";
+	
+	// create base URI's for content provider
+	public static final URI BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+	
+	// paths to append to base content for URI
+	public static final String PATH_WEATHER = "weather";
+	public static final String PATH_LOCATION = "location";
+			
     /* Inner class that defines the table contents of the weather table */
     public static final class WeatherEntry implements BaseColumns {
  
