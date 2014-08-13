@@ -7,6 +7,13 @@ import android.net.Uri;
 
 public class WeatherProvider extends ContentProvider {
 
+	// add constants to help uri querys
+	private static final int WEATHER = 100;
+	private static final int WEATHER_WITH_LOCATION = 101;
+	private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
+	private static final int LOCATION = 300;
+	private static final int LOCATION_ID = 301;
+	
 	@Override
 	public boolean onCreate() {
 		// TODO Auto-generated method stub
