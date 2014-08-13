@@ -1092,11 +1092,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
         public static final int action_context_bar=0x7f06001d;
+        public static final int action_map=0x7f060043;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_refresh=0x7f060041;
+        public static final int action_refresh=0x7f060042;
         public static final int action_settings=0x7f060040;
+        public static final int action_share=0x7f060041;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
@@ -1211,9 +1213,10 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int detail=0x7f0e0000;
-        public static final int forecastfragment=0x7f0e0001;
-        public static final int main=0x7f0e0002;
-        public static final int settings=0x7f0e0003;
+        public static final int detailfragment=0x7f0e0001;
+        public static final int forecastfragment=0x7f0e0002;
+        public static final int main=0x7f0e0003;
+        public static final int settings=0x7f0e0004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1256,15 +1259,17 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
+        public static final int action_map=0x7f0b000f;
         /**  Menu label to fetch updated weather info from the server 
          */
-        public static final int action_refresh=0x7f0b000f;
+        public static final int action_refresh=0x7f0b0011;
         /** 
          By convention, "action" denotes that this String will be used as the label for an Action,
          typically from the action bar.  The ActionBar is limited real estate, so shorter is better.
     
          */
         public static final int action_settings=0x7f0b000e;
+        public static final int action_share=0x7f0b0010;
         /** 
          Used in Action Bar, and in AndroidManifest to tell the device the name of this app.
          It's to keep this short, so your launcher icon isn't displayed with "The greatest Wea"
@@ -1274,34 +1279,34 @@ containing a value of this type.
         public static final int app_name=0x7f0b000d;
         /**  Default postal code for location preference [CHAR LIMIT=NONE] 
          */
-        public static final int pref_location_default=0x7f0b0018;
+        public static final int pref_location_default=0x7f0b001a;
         /**  Key name for storing location in SharedPreferences [CHAR LIMIT=NONE] 
          */
-        public static final int pref_location_key=0x7f0b0016;
+        public static final int pref_location_key=0x7f0b0018;
         /**  Label for the location pref 
          */
-        public static final int pref_location_label=0x7f0b0012;
-        public static final int pref_temp_units_default=0x7f0b0019;
+        public static final int pref_location_label=0x7f0b0014;
+        public static final int pref_temp_units_default=0x7f0b001b;
         /**  Value in SharedPreferences for imperial temp units 
          */
-        public static final int pref_temp_units_imperial=0x7f0b001b;
+        public static final int pref_temp_units_imperial=0x7f0b001d;
         /**  Key for temp unit pref in SharedPreferences 
          */
-        public static final int pref_temp_units_key=0x7f0b0017;
+        public static final int pref_temp_units_key=0x7f0b0019;
         /**   _Label for temp pref
          */
-        public static final int pref_temp_units_label=0x7f0b0013;
+        public static final int pref_temp_units_label=0x7f0b0015;
         /**  Label for imperial option in tempe unit pref 
          */
-        public static final int pref_temp_units_label_imperial=0x7f0b0015;
+        public static final int pref_temp_units_label_imperial=0x7f0b0017;
         /**  Label for metric option in temp unit pref 
          */
-        public static final int pref_temp_units_label_metric=0x7f0b0014;
+        public static final int pref_temp_units_label_metric=0x7f0b0016;
         /**  Value in SharedPreferences for metric temp units 
          */
-        public static final int pref_temp_units_metric=0x7f0b001a;
-        public static final int title_activity_detail=0x7f0b0010;
-        public static final int title_activity_settings=0x7f0b0011;
+        public static final int pref_temp_units_metric=0x7f0b001c;
+        public static final int title_activity_detail=0x7f0b0012;
+        public static final int title_activity_settings=0x7f0b0013;
     }
     public static final class style {
         /** 
