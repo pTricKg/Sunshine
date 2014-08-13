@@ -1270,14 +1270,15 @@ containing a value of this type.
         public static final int app_name=0x7f0b000d;
         /**  Default postal code for location preference [CHAR LIMIT=NONE] 
          */
-        public static final int pref_location_default=0x7f0b0015;
+        public static final int pref_location_default=0x7f0b0016;
         /**  Key name for storing location in SharedPreferences [CHAR LIMIT=NONE] 
          */
         public static final int pref_location_key=0x7f0b0014;
         /**  Label for the location preference [CHAR LIMIT=30] 
          */
         public static final int pref_location_label=0x7f0b0012;
-        public static final int pref_temperature_default=0x7f0b0016;
+        public static final int pref_temperature_default=0x7f0b0017;
+        public static final int pref_temperature_key=0x7f0b0015;
         /**   _Label for temp pref
          */
         public static final int pref_temperature_label=0x7f0b0013;
