@@ -56,8 +56,19 @@ public class WeatherProvider extends ContentProvider {
 
 	@Override
 	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// used to associate mime type with given uri
+		final int match = sUriMatcher.match(uri);
+		switch (match) {
+        case WEATHER_WITH_LOCATION_AND_DATE:
+            return WeatherContract.WeatherEntry.CONTENT_ITEM_TYPE;
+        case WEATHER_WITH_LOCATION:
+            return WeatherContract.WeatherEntry.CONTENT_TYPE;
+        case WEATHER:
+            return WeatherContract.WeatherEntry.CONTENT_TYPE;
+        default:
+            throw new UnsupportedOperationException("Unknown uri: " + uri);
+    }
 	}
 
 	@Override
