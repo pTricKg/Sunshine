@@ -16,6 +16,10 @@ public final class R {
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
     }
+    public static final class array {
+        public static final int pref_temp_units_options=0x7f0d0000;
+        public static final int pref_temp_units_values=0x7f0d0001;
+    }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -1206,10 +1210,10 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
-        public static final int detail=0x7f0d0000;
-        public static final int forecastfragment=0x7f0d0001;
-        public static final int main=0x7f0d0002;
-        public static final int settings=0x7f0d0003;
+        public static final int detail=0x7f0e0000;
+        public static final int forecastfragment=0x7f0e0001;
+        public static final int main=0x7f0e0002;
+        public static final int settings=0x7f0e0003;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1270,18 +1274,32 @@ containing a value of this type.
         public static final int app_name=0x7f0b000d;
         /**  Default postal code for location preference [CHAR LIMIT=NONE] 
          */
-        public static final int pref_location_default=0x7f0b0016;
+        public static final int pref_location_default=0x7f0b0018;
         /**  Key name for storing location in SharedPreferences [CHAR LIMIT=NONE] 
          */
-        public static final int pref_location_key=0x7f0b0014;
-        /**  Label for the location preference [CHAR LIMIT=30] 
+        public static final int pref_location_key=0x7f0b0016;
+        /**  Label for the location pref 
          */
         public static final int pref_location_label=0x7f0b0012;
-        public static final int pref_temperature_default=0x7f0b0017;
-        public static final int pref_temperature_key=0x7f0b0015;
+        public static final int pref_temp_units_default=0x7f0b0019;
+        /**  Value in SharedPreferences for imperial temp units 
+         */
+        public static final int pref_temp_units_imperial=0x7f0b001b;
+        /**  Key for temp unit pref in SharedPreferences 
+         */
+        public static final int pref_temp_units_key=0x7f0b0017;
         /**   _Label for temp pref
          */
-        public static final int pref_temperature_label=0x7f0b0013;
+        public static final int pref_temp_units_label=0x7f0b0013;
+        /**  Label for imperial option in tempe unit pref 
+         */
+        public static final int pref_temp_units_label_imperial=0x7f0b0015;
+        /**  Label for metric option in temp unit pref 
+         */
+        public static final int pref_temp_units_label_metric=0x7f0b0014;
+        /**  Value in SharedPreferences for metric temp units 
+         */
+        public static final int pref_temp_units_metric=0x7f0b001a;
         public static final int title_activity_detail=0x7f0b0010;
         public static final int title_activity_settings=0x7f0b0011;
     }

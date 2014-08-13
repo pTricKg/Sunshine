@@ -12,7 +12,7 @@
     
     <ListPreference
         android:title="@string/pref_temp_units_label"
-        android:key="@string/pref_temp_]units_key"
+        android:key="@string/pref_temp_units_key"
         android:defaultValue="@string/pref_temp_units_metric"
         android:entryValues="@array/pref_temp_units_values"
         android:entries="@array/pref_temp_units_options" />
