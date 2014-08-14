@@ -1,6 +1,7 @@
 package com.pTricKg.sunshine.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -53,10 +54,72 @@ public class WeatherProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] strings, String s, String[] strings2, String s2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
+        // given uri will dictate kind of request and query database accordingly
+        Cursor retCursor;
+        switch (sUriMatcher.match(uri)) {
+            // "weather/*/*"
+            case WEATHER_WITH_LOCATION_AND_DATE:
+            {
+                retCursor = null;
+                break;
+            }
+            // "weather/*"
+            case WEATHER_WITH_LOCATION: {
+                retCursor = null;
+                break;
+            }
+            // "weather"
+            case WEATHER: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        WeatherContract.WeatherEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            // "location/*"
+            case LOCATION_ID: {
+                retCursor =mOpenHelper.getReadableDatabase().query(
+                        WeatherContract.LocationEntry.TABLE_NAME,
+                        projection,
+                        WeatherContract.LocationEntry._ID + " = '" + ContentUris.parseId(uri) + "'",
+                        null,
+                        null,
+                        null,
+                        sortOrder
+            );
+                        
+                break;
+            }
+            // "location"
+            case LOCATION: {
+            	retCursor =mOpenHelper.getReadableDatabase().query(
+                        WeatherContract.LocationEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+            );
+                break;
+            }
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        // set to notification uri to one passed in
+        // this way cursoer will set content observer to view changes to uri
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
+    }
+
 
 	@Override
 	public String getType(Uri uri) {
