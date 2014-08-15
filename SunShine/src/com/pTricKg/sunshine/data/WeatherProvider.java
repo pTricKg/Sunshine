@@ -36,6 +36,10 @@ public class WeatherProvider extends ContentProvider {
             WeatherContract.LocationEntry.TABLE_NAME+
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATETEXT + " >= ? ";
+    private static final String sLocationSettingWithDaySelection =
+            WeatherContract.LocationEntry.TABLE_NAME+
+                    "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
+                    WeatherContract.WeatherEntry.COLUMN_DATETEXT + " = ? ";
  
     private Cursor getWeatherByLocationSetting(Uri uri, String[] projection, String sortOrder) {
         String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
@@ -115,7 +119,7 @@ public class WeatherProvider extends ContentProvider {
             // "weather/*/*"
             case WEATHER_WITH_LOCATION_AND_DATE:
             {
-                retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);;
+                retCursor = getWeatherByLocationSettingWithDate(uri, projection, sortOrder);;
                 break;
             }
             // "weather/*"
@@ -174,15 +178,30 @@ public class WeatherProvider extends ContentProvider {
     }
 
 
-	private Cursor getWeatherByLocationSettingAndDate(Uri uri,
+//	private Cursor getWeatherByLocationSettingAndDate(Uri uri,
+//			String[] projection, String sortOrder) {
+//		String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
+//        String date = WeatherContract.WeatherEntry.getDateFromUri(uri);
+//
+//        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+//                projection,
+//                sLocationSettingAndDaySelection,
+//                new String[]{locationSetting, date},
+//                null,
+//                null,
+//                sortOrder
+//        );
+//	}
+	
+	private Cursor getWeatherByLocationSettingWithDate(Uri uri,
 			String[] projection, String sortOrder) {
 		String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
-        String date = WeatherContract.WeatherEntry.getDateFromUri(uri);
+        String day = WeatherContract.WeatherEntry.getDateFromUri(uri);
 
         return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
                 sLocationSettingAndDaySelection,
-                new String[]{locationSetting, date},
+                new String[]{locationSetting, day},
                 null,
                 null,
                 sortOrder
