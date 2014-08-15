@@ -5,6 +5,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
@@ -226,24 +227,30 @@ public class WeatherProvider extends ContentProvider {
 			case LOCATION_ID:
 				return WeatherContract.LocationEntry.CONTENT_ITEM_TYPE;
 			default:
-				throw new UnsupportedOperationException("Unknown uri: " + uri);
+				throw new  UnsupportedOperationException("Unknown uri: " + uri);
 		}
 	}
 
 	@Override
-	public Uri insert(Uri uri, ContentValues contentValues) {
+	public Uri insert(Uri uri, ContentValues values) {
 		// used to associate mime type with given uri
-				final int match = sUriMatcher.match(uri);
-				Uri returnUri = null;
+		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		final int match = sUriMatcher.match(uri);
+		Uri returnUri = null;
 
-				switch (match) {
-					
-					case WEATHER:
-						break;
-					case LOCATION:
-						break;
-					default:
-						throw new UnsupportedOperationException("Unknown uri: " + uri);
+		switch (match) {
+			
+			case WEATHER:
+				long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = WeatherContract.WeatherEntry.buildWeatherUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+			case LOCATION:
+				break;
+			default:
+				throw new UnsupportedOperationException("Unknown uri: " + uri);
 				}
 				return returnUri;
 	}
