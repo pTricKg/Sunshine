@@ -37,7 +37,7 @@ public class WeatherProvider extends ContentProvider {
             WeatherContract.LocationEntry.TABLE_NAME+
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATETEXT + " >= ? ";
-    private static final String sLocationSettingWithDaySelection =
+    private static final String sLocationSettingAndDaySelection =
             WeatherContract.LocationEntry.TABLE_NAME+
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATETEXT + " = ? ";
@@ -66,13 +66,23 @@ public class WeatherProvider extends ContentProvider {
                 sortOrder
         );
     }
-	
-    private static final String sLocationSettingAndDaySelection =
-            WeatherContract.LocationEntry.TABLE_NAME +
-                    "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
-                    WeatherContract.WeatherEntry.COLUMN_DATETEXT + " = ? ";
+    
+    private Cursor getWeatherByLocationSettingWithDate(Uri uri,
+			String[] projection, String sortOrder) {
+		String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
+        String day = WeatherContract.WeatherEntry.getDateFromUri(uri);
 
-	// add constants to help uri querys
+        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                sLocationSettingAndDaySelection,
+                new String[]{locationSetting, day},
+                null,
+                null,
+                sortOrder
+        );
+	}
+	
+    // add constants to help uri querys
 		private static final int WEATHER = 100;
 		private static final int WEATHER_WITH_LOCATION = 101;
 		private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
@@ -194,21 +204,7 @@ public class WeatherProvider extends ContentProvider {
 //        );
 //	}
 	
-	private Cursor getWeatherByLocationSettingWithDate(Uri uri,
-			String[] projection, String sortOrder) {
-		String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
-        String day = WeatherContract.WeatherEntry.getDateFromUri(uri);
-
-        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
-                projection,
-                sLocationSettingAndDaySelection,
-                new String[]{locationSetting, day},
-                null,
-                null,
-                sortOrder
-        );
-	}
-
+	
 	@Override
 	public String getType(Uri uri) {
 
@@ -265,9 +261,29 @@ public class WeatherProvider extends ContentProvider {
 	}
 	
 	@Override
-	public int delete(Uri uri, String s, String[] strings) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		final int match = sUriMatcher.match(uri);
+		int deleted;
+
+		switch (match) {
+			
+			case WEATHER: {
+				deleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME,selection, selectionArgs);
+                
+                   break;
+            			}
+			case LOCATION: {
+				deleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME, selection, selectionArgs);
+                
+				break;
+			}
+			default:
+				throw new UnsupportedOperationException("Unknown uri: " + uri);
+				}
+		// notify observers on changes made
+		getContext().getContentResolver().notifyChange(uri, null);
+		return deleted;
 	}
 
 	@Override
