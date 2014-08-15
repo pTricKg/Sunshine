@@ -62,6 +62,11 @@ public class WeatherProvider extends ContentProvider {
         );
     }
 	
+    private static final String sLocationSettingAndDaySelection =
+            WeatherContract.LocationEntry.TABLE_NAME +
+                    "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
+                    WeatherContract.WeatherEntry.COLUMN_DATETEXT + " = ? ";
+
 	// add constants to help uri querys
 		private static final int WEATHER = 100;
 		private static final int WEATHER_WITH_LOCATION = 101;
@@ -110,7 +115,7 @@ public class WeatherProvider extends ContentProvider {
             // "weather/*/*"
             case WEATHER_WITH_LOCATION_AND_DATE:
             {
-                retCursor = null;
+                retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);;
                 break;
             }
             // "weather/*"
@@ -168,6 +173,21 @@ public class WeatherProvider extends ContentProvider {
         return retCursor;
     }
 
+
+	private Cursor getWeatherByLocationSettingAndDate(Uri uri,
+			String[] projection, String sortOrder) {
+		String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
+        String date = WeatherContract.WeatherEntry.getDateFromUri(uri);
+
+        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection,
+                sLocationSettingAndDaySelection,
+                new String[]{locationSetting, date},
+                null,
+                null,
+                sortOrder
+        );
+	}
 
 	@Override
 	public String getType(Uri uri) {
