@@ -232,10 +232,22 @@ public class WeatherProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues contentValues) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		// used to associate mime type with given uri
+				final int match = sUriMatcher.match(uri);
+				Uri returnUri = null;
 
+				switch (match) {
+					
+					case WEATHER:
+						break;
+					case LOCATION:
+						break;
+					default:
+						throw new UnsupportedOperationException("Unknown uri: " + uri);
+				}
+				return returnUri;
+	}
+	
 	@Override
 	public int delete(Uri uri, String s, String[] strings) {
 		// TODO Auto-generated method stub
