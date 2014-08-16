@@ -19,11 +19,14 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,9 +42,9 @@ import android.widget.Toast;
 /**
  * Encapsulates fetching the forecast and displaying it as a {@link ListView} layout.
  */
-public class ForecastFragment extends Fragment {
+public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
-    private ArrayAdapter<String> mForecastAdapter;
+    private ArrayAdapter<String> mForecastAdapter; 
 
     public ForecastFragment() {
     }
@@ -140,6 +143,24 @@ public class ForecastFragment extends Fragment {
         super.onStart();
         updateWeather();
     }
+    
+    @Override
+    public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+    
+    @Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
@@ -344,4 +365,6 @@ public class ForecastFragment extends Fragment {
             }
         }
     }
+
+	
 }
