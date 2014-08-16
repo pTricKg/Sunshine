@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.pTricKg.sunshine.data.WeatherContract;
 import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
 import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
 
@@ -85,6 +87,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     public void onActivityCreated(Bundle savedInstanceState) {
     	// TODO Auto-generated method stub
     	super.onActivityCreated(savedInstanceState);
+    	getLoaderManager().initLoader(FORECAST_LOADER, null, this);
+    	
     }
 
     @Override
@@ -185,7 +189,31 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
     	// TODO Auto-generated method stub
-    	return null;
+    	// This is called when a new Loader needs to be created.  This
+        // fragment only uses one loader, so we don't care about checking the id.
+
+        // To only show current and future dates, get the String representation for today,
+        // and filter the query to return weather only for dates after or including today.
+        // Only return data after today.
+        String startDate = WeatherContract.getDbDateString(new Date());
+
+        // Sort order:  Ascending, by date.
+        String sortOrder = WeatherEntry.COLUMN_DATETEXT + " ASC";
+
+        mLocation = Utility.getPreferredLocation(getActivity());
+        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithStartDate(
+                mLocation, startDate);
+
+        // Now create and return a CursorLoader that will take care of
+        // creating a Cursor for the data being displayed.
+        return new CursorLoader(
+                getActivity(),
+                weatherForLocationUri,
+                FORECAST_COLUMNS,
+                null,
+                null,
+                sortOrder
+        );
     }
     
     @Override
