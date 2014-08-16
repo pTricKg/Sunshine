@@ -458,9 +458,9 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         @Override
         protected void onPostExecute(String[] result) {
             if (result != null) {
-                mForecastAdapter.clear();
+                ((Menu) mForecastAdapter).clear();
                 for(String dayForecastStr : result) {
-                    mForecastAdapter.add(dayForecastStr);
+                    ((Menu) mForecastAdapter).add(dayForecastStr);
                 }
                 // New data is back from the server.  Hooray!
             }
