@@ -79,6 +79,13 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 
     public ForecastFragment() {
     }
+   
+    @Override
+    // binding loader to activity
+    public void onActivityCreated(Bundle savedInstanceState) {
+    	// TODO Auto-generated method stub
+    	super.onActivityCreated(savedInstanceState);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
