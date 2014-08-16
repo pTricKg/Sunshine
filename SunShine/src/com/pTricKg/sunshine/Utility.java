@@ -1,14 +1,15 @@
 package com.pTricKg.sunshine;
 
 import java.util.Date;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
-
 import com.pTricKg.sunshine.data.WeatherContract;
- 
+import java.util.Date;
+
+@SuppressLint("DefaultLocale")
 public class Utility {
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
