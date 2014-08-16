@@ -145,5 +145,11 @@ public class WeatherContract {
                 return ContentUris.withAppendedId(CONTENT_URI, id);
             }
     }
+
+
+		public static Date getDateFromDb(String dateString) {
+			// TODO Auto-generated method stub
+			return null;
+		}
     
 }
