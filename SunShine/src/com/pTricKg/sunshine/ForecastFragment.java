@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +48,7 @@ import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
  */
 public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
-    private ArrayAdapter<String> mForecastAdapter; 
+    private SimpleCursorAdapter mForecastAdapter; 
     
     private static final int FORECAST_LOADER = 0;
     private String mLocation;
