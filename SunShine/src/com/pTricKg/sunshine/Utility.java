@@ -37,4 +37,6 @@ public class Utility {
         Date date = WeatherContract.getDateFromDb(dateString);
         return DateFormat.getDateInstance().format(date);
     }
+
+	
 }
