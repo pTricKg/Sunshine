@@ -1,11 +1,10 @@
 package com.pTricKg.sunshine;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.pTricKg.sunshine.data.WeatherContract;
-
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -23,7 +22,8 @@ public class Utility {
                 .equals(context.getString(R.string.pref_temp_units_metric));
     }
 
-    static String formatTemperature(double temperature, boolean isMetric) {
+    @SuppressLint("DefaultLocale")
+	static String formatTemperature(double temperature, boolean isMetric) {
         double temp;
         if ( !isMetric ) {
             temp = 9*temperature/5+32;
