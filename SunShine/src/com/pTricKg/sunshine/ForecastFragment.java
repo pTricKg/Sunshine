@@ -254,12 +254,13 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     @Override
 	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
 		// TODO Auto-generated method stub
-		
+    	mForecastAdapter.swapCursor(arg1);		
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> arg0) {
 		// TODO Auto-generated method stub
+		mForecastAdapter.swapCursor(null);		
 		
 	}
 
@@ -455,17 +456,17 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             return null;
         }
 
-        @Override
-        protected void onPostExecute(String[] result) {
-            if (result != null) {
-                ((Menu) mForecastAdapter).clear();
-                for(String dayForecastStr : result) {
-                    ((Menu) mForecastAdapter).add(dayForecastStr);
-                }
-                // New data is back from the server.  Hooray!
-            }
-        }
-    }
+//        @Override
+//        protected void onPostExecute(String[] result) {
+//            if (result != null) {
+//                ((Menu) mForecastAdapter).clear();
+//                for(String dayForecastStr : result) {
+//                    ((Menu) mForecastAdapter).add(dayForecastStr);
+//                }
+//                // New data is back from the server.  Hooray!
+//            }
+//        }
+  }
 
 	
 }
