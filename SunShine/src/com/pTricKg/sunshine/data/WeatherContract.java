@@ -1,6 +1,5 @@
 package com.pTricKg.sunshine.data;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -146,18 +145,5 @@ public class WeatherContract {
                 return ContentUris.withAppendedId(CONTENT_URI, id);
             }
     }
-
-
-		public static Date getDateFromDb(String dateString) {
-			// TODO Auto-generated method stub
-			SimpleDateFormat dbDateFormat = new SimpleDateFormat(DATE_FORMAT);
-			try {
-				return dbDateFormat.parse(dateString);
-			}catch (ParseException e) {
-				e.printStackTrace( );
-				return null;
-			}
-			
-		}
     
 }

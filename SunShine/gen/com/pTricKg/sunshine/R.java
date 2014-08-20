@@ -1211,8 +1211,9 @@ containing a value of this type.
         public static final int activity_settings=0x7f03001a;
         public static final int fragment_detail=0x7f03001b;
         public static final int fragment_main=0x7f03001c;
-        public static final int list_item_forecast=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int fragment_settings=0x7f03001d;
+        public static final int list_item_forecast=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int detail=0x7f0e0000;

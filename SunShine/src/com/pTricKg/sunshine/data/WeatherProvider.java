@@ -11,6 +11,13 @@ import android.net.Uri;
 
 public class WeatherProvider extends ContentProvider {
 
+	// add constants to help uri querys
+	private static final int WEATHER = 100;
+	private static final int WEATHER_WITH_LOCATION = 101;
+	private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
+	private static final int LOCATION = 300;
+	private static final int LOCATION_ID = 301;
+
 	// content provider uri matcher
 	private static final UriMatcher sUriMatcher = buildUriMatcher();
 
@@ -82,13 +89,6 @@ public class WeatherProvider extends ContentProvider {
 				sLocationSettingAndDaySelection, new String[] {
 						locationSetting, day }, null, null, sortOrder);
 	}
-
-	// add constants to help uri querys
-	private static final int WEATHER = 100;
-	private static final int WEATHER_WITH_LOCATION = 101;
-	private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
-	private static final int LOCATION = 300;
-	private static final int LOCATION_ID = 301;
 
 	private static UriMatcher buildUriMatcher() {
 
@@ -308,8 +308,9 @@ public class WeatherProvider extends ContentProvider {
 		}
 		return rowsUpdated;
 	}
+
 	@Override
-	public int bulkInsert(Uri uri, ContentValues[] values) { 
+	public int bulkInsert(Uri uri, ContentValues[] values) {
 		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		final int match = sUriMatcher.match(uri);
 		switch (match) {
@@ -318,11 +319,13 @@ public class WeatherProvider extends ContentProvider {
 			int returnCount = 0;
 			try {
 				for (ContentValues value : values) {
-					long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, value);
-						if (_id != -1) { 
-							returnCount++;
+					long _id = db.insert(
+							WeatherContract.WeatherEntry.TABLE_NAME, null,
+							value);
+					if (_id != -1) {
+						returnCount++;
 					}
-							
+
 				}
 				db.setTransactionSuccessful();
 			} finally {
@@ -332,7 +335,7 @@ public class WeatherProvider extends ContentProvider {
 			return returnCount;
 		default:
 			return super.bulkInsert(uri, values);
-		}	
+		}
 	}
-		
+
 }
