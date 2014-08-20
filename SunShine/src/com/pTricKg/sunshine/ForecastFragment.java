@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pTricKg.sunshine.data.WeatherContract;
@@ -171,6 +172,29 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
                 },
                 0
         );
+        
+        mForecastAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                boolean isMetric = Utility.isMetric(getActivity());
+                switch (columnIndex) {
+                    case COL_WEATHER_MAX_TEMP:
+                    case COL_WEATHER_MIN_TEMP: {
+                        // we have to do some formatting and possibly a conversion
+                        ((TextView) view).setText(Utility.formatTemperature(
+                                cursor.getDouble(columnIndex), isMetric));
+                        return true;
+                    }
+                    case COL_WEATHER_DATE: {
+                        String dateString = cursor.getString(columnIndex);
+                        TextView dateView = (TextView) view;
+                        dateView.setText(Utility.formatDate(dateString));
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.
@@ -181,10 +205,10 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 			@Override
 			public void onItemClick(AdapterView<?> AdapterView, View view,
 					int i, long l) {
-				String forecast = mForecastAdapter.getItem(i); // pull from adapter
-				Toast.makeText(getActivrootView.findVity(), forecast, Toast.LENGTH_LONG).show();
+				//String forecast = mForecastAdapter.getItem(i); // pull from adapter
+				//Toast.makeText(getActivrootView., forecast, Toast.LENGTH_LONG).show();
 				Intent intent = new Intent(getActivity(), DetailActivity.class)
-				.putExtra(Intent.EXTRA_TEXT, forecast);
+				.putExtra(Intent.EXTRA_TEXT, "forecast");
 				startActivity(intent);
 			}
         	
