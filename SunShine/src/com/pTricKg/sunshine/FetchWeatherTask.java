@@ -11,14 +11,18 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.pTricKg.sunshine.data.WeatherContract;
 import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
 import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,9 +42,9 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 	private final Context mContext;
 
 	public FetchWeatherTask(Context context,
-			ArrayAdapter<String> forecastAdapter) {
+			SimpleCursorAdapter mForecastAdapter) {
 		mContext = context;
-		mForecastAdapter = forecastAdapter;
+		
 	}
 
 	private boolean DEBUG = true;
@@ -400,15 +404,15 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 		return null;
 	}
 
-	@Override
-	protected void onPostExecute(String[] result) {
-		if (result != null) {
-			mForecastAdapter.clear();
-			for (String dayForecastStr : result) {
-				mForecastAdapter.add(dayForecastStr);
-			}
-			// New data is back from the server. Hooray!
-		}
-	}
+//	@Override
+//	protected void onPostExecute(String[] result) {
+//		if (result != null) {
+//			mForecastAdapter.clear();
+//			for (String dayForecastStr : result) {
+//				mForecastAdapter.add(dayForecastStr);
+//			}
+//			// New data is back from the server. Hooray!
+//		}
+//	}
 
 }
