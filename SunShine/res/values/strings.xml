@@ -49,6 +49,6 @@
     <!-- Value in SharedPreferences for imperial temp units -->
     <string name="pref_temp_units_imperial" translatable="false">imperial</string>
     
-   
+    <string name="somedumbstring" translatable="false">SomeDumbString</string>
 
 </resources>
