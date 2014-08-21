@@ -219,7 +219,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     
     // new update weather method to populate real data
     private void updateWeather() {
-    	FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity(), mForecastAdapter);
+    	FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String location = prefs.getString(getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default));

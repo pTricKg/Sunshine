@@ -34,15 +34,14 @@ import java.util.Date;
 import java.util.Vector;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
 	private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
-	private ArrayAdapter<String> mForecastAdapter;
+	//private ArrayAdapter<String> mForecastAdapter;
 	private final Context mContext;
 
-	public FetchWeatherTask(Context context,
-			SimpleCursorAdapter mForecastAdapter) {
+	public FetchWeatherTask(Context context) {
 		mContext = context;
 		
 	}
@@ -149,7 +148,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 	 * Fortunately parsing is easy: constructor takes the JSON string and
 	 * converts it into an Object hierarchy for us.
 	 */
-	private String[] getWeatherDataFromJson(String forecastJsonStr,
+	private void getWeatherDataFromJson(String forecastJsonStr,
 			int numDays, String locationSetting) throws JSONException {
 
 		// These are the names of the JSON objects that need to be extracted.
@@ -264,9 +263,9 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
 			cVVector.add(weatherValues);
 
-			String highAndLow = formatHighLows(high, low);
-			String day = getReadableDateString(dateTime);
-			resultStrs[i] = day + " - " + description + " - " + highAndLow;
+//			String highAndLow = formatHighLows(high, low);
+//			String day = getReadableDateString(dateTime);
+//			resultStrs[i] = day + " - " + description + " - " + highAndLow;
 		}
 		// make backend to get data easily from array
 		if (cVVector.size() > 0) {
@@ -298,11 +297,11 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 				}
 			}
 		}
-		return resultStrs;
+		
 	}
 
 	@Override
-	protected String[] doInBackground(String... params) {
+	protected Void doInBackground(String... params) {
 
 		// If there's no zip code, there's nothing to look up. Verify size of
 		// params.
@@ -392,7 +391,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 		}
 
 		try {
-			return getWeatherDataFromJson(forecastJsonStr, numDays,
+			getWeatherDataFromJson(forecastJsonStr, numDays,
 					locationQuery);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, e.getMessage(), e);
