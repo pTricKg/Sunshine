@@ -46,21 +46,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 		
 	}
 
-	private boolean DEBUG = true;
-
-	/*
-	 * The date/time conversion code is going to be moved outside the asynctask
-	 * later, so for convenience we're breaking it out into its own method now.
-	 */
-	private String getReadableDateString(long time) {
-		// Because the API returns a unix timestamp (measured in seconds),
-		// it must be converted to milliseconds in order to be converted to
-		// valid date.
-		Date date = new Date(time * 1000);
-		SimpleDateFormat format = new SimpleDateFormat("E, MMM d");
-		return format.format(date).toString();
-	}
-
+	
 	/**
 	 * Prepare the weather high/lows for presentation.
 	 */
@@ -269,34 +255,10 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 		}
 		// make backend to get data easily from array
 		if (cVVector.size() > 0) {
-			ContentValues[] cvArray = new ContentValues[cVVector.size()];
-			cVVector.toArray(cvArray);
-			int rowsInserted = mContext.getContentResolver().bulkInsert(
-					WeatherEntry.CONTENT_URI, cvArray);
-			Log.v(LOG_TAG, "inserted " + rowsInserted + " rows of weather data");
-			// Use a DEBUG variable to gate whether or not you do this, so you
-			// can easily
-			// turn it on and off, and so that it's easy to see what you can rip
-			// out if
-			// you ever want to remove it.
-			if (DEBUG) {
-				Cursor weatherCursor = mContext.getContentResolver().query(
-						WeatherEntry.CONTENT_URI, null, null, null, null);
-
-				if (weatherCursor.moveToFirst()) {
-					ContentValues resultValues = new ContentValues();
-					DatabaseUtils.cursorRowToContentValues(weatherCursor,
-							resultValues);
-					Log.v(LOG_TAG, "Query succeeded! **********");
-					for (String key : resultValues.keySet()) {
-						Log.v(LOG_TAG,
-								key + ": " + resultValues.getAsString(key));
-					}
-				} else {
-					Log.v(LOG_TAG, "Query failed! :( **********");
-				}
-			}
-		}
+            ContentValues[] cvArray = new ContentValues[cVVector.size()];
+            cVVector.toArray(cvArray);
+            mContext.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI, cvArray);
+        }
 		
 	}
 

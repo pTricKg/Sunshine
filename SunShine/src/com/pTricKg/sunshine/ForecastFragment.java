@@ -219,11 +219,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     
     // new update weather method to populate real data
     private void updateWeather() {
-    	FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
-        weatherTask.execute(location);
+    	String location = Utility.getPreferredLocation(getActivity());
+        new FetchWeatherTask(getActivity()).execute(location);
     }
 
     @Override
@@ -233,7 +230,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     }
     
     @Override
-    public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	// TODO Auto-generated method stub
     	// This is called when a new Loader needs to be created.  This
         // fragment only uses one loader, so we don't care about checking the id.
