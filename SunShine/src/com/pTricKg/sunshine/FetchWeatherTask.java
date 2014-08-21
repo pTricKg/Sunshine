@@ -38,7 +38,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
 	private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
-	//private ArrayAdapter<String> mForecastAdapter;
 	private final Context mContext;
 
 	public FetchWeatherTask(Context context) {
@@ -249,9 +248,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
 			cVVector.add(weatherValues);
 
-//			String highAndLow = formatHighLows(high, low);
-//			String day = getReadableDateString(dateTime);
-//			resultStrs[i] = day + " - " + description + " - " + highAndLow;
+
 		}
 		// make backend to get data easily from array
 		if (cVVector.size() > 0) {
@@ -365,15 +362,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 		return null;
 	}
 
-//	@Override
-//	protected void onPostExecute(String[] result) {
-//		if (result != null) {
-//			mForecastAdapter.clear();
-//			for (String dayForecastStr : result) {
-//				mForecastAdapter.add(dayForecastStr);
-//			}
-//			// New data is back from the server. Hooray!
-//		}
-//	}
+
 
 }
