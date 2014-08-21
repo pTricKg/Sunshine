@@ -1,37 +1,31 @@
 package com.pTricKg.sunshine;
 
-import android.annotation.TargetApi;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.pTricKg.sunshine.data.WeatherContract;
-import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
-import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.TargetApi;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.util.Log;
+
+import com.pTricKg.sunshine.data.WeatherContract;
+import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
+import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
@@ -43,40 +37,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 	public FetchWeatherTask(Context context) {
 		mContext = context;
 		
-	}
-
-	
-	/**
-	 * Prepare the weather high/lows for presentation.
-	 */
-	private String formatHighLows(double high, double low) {
-		// Data is fetched in Celsius by default.
-		// If user prefers to see in Fahrenheit, convert the values here.
-		// We do this rather than fetching in Fahrenheit so that the user can
-		// change this option without us having to re-fetch the data once
-		// we start storing the values in a database.
-		SharedPreferences sharedPrefs = PreferenceManager
-				.getDefaultSharedPreferences(mContext);
-		String unitType = sharedPrefs.getString(
-				mContext.getString(R.string.pref_temp_units_key),
-				mContext.getString(R.string.pref_temp_units_metric));
-
-		if (unitType.equals(mContext
-				.getString(R.string.pref_temp_units_imperial))) {
-			high = (high * 1.8) + 32;
-			low = (low * 1.8) + 32;
-		} else if (!unitType.equals(mContext
-				.getString(R.string.pref_temp_units_metric))) {
-			Log.d(LOG_TAG, "Unit type not found: " + unitType);
-		}
-
-		// For presentation, assume the user doesn't care about tenths of a
-		// degree.
-		long roundedHigh = Math.round(high);
-		long roundedLow = Math.round(low);
-
-		String highLowStr = roundedHigh + "/" + roundedLow;
-		return highLowStr;
 	}
 
 	/**
@@ -184,8 +144,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 		Vector<ContentValues> cVVector = new Vector<ContentValues>(
 				weatherArray.length());
 
-		String[] resultStrs = new String[numDays];
-
+		
 		for (int i = 0; i < weatherArray.length(); i++) {
 			// These are the values that will be collected.
 
