@@ -166,13 +166,13 @@ public class ForecastFragment extends Fragment implements
 				//Toast.makeText(getActivrootView., forecast, Toast.LENGTH_LONG).show();
 				SimpleCursorAdapter adapter = (SimpleCursorAdapter) adapterView.getAdapter();
 				Cursor cursor = adapter.getCursor();
-//				if (null != cursor && cursor.moveToPosition(i)) {
-//					boolean isMetric = Utility.isMetric(getActivity());
-//					String forecast = String.format("%s - %s - %s/%s",
-//							Utility.formatDate(cursor.getString(COL_WEATHER_DATE)),
-//									cursor.getString(COL_WEATHER_DESC),
-//									Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MAX_TEMP), isMetric),
-//									Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MIN_TEMP), isMetric));
+				if (null != cursor && cursor.moveToPosition(i)) {
+					boolean isMetric = Utility.isMetric(getActivity());
+					String forecast = String.format("%s - %s - %s/%s",
+							Utility.formatDate(cursor.getString(COL_WEATHER_DATE)),
+									cursor.getString(COL_WEATHER_DESC),
+									Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MAX_TEMP), isMetric),
+									Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MIN_TEMP), isMetric));
 									
 					Intent intent = new Intent(getActivity(), DetailActivity.class)
 							.putExtra(DetailActivity.DATE_KEY, cursor.getString(COL_WEATHER_DATE));
@@ -180,7 +180,7 @@ public class ForecastFragment extends Fragment implements
 									
 				}
 				
-//			}
+			}
         	
         });
 
