@@ -86,10 +86,10 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             getLoaderManager().initLoader(DETAIL_LOADER, null, this);
-//            if (savedInstanceState != null) {
-//                mLocation = savedInstanceState.getString(LOCATION_KEY);
-//            }
-//            super.onActivityCreated(savedInstanceState);
+            if (savedInstanceState != null) {
+                mLocation = savedInstanceState.getString(LOCATION_KEY);
+            }
+            super.onActivityCreated(savedInstanceState);
       }
 
         @Override
@@ -192,7 +192,8 @@ public class DetailActivity extends ActionBarActivity {
             highView.setText(Utility.formatTemperature(high, isMetric)+ "\u00B0");
             lowView.setText(Utility.formatTemperature(low, isMetric) + "\u00B0");
             
-            
+            mForecastStr = String.format("%s - %s - %s/%s", dateView.getText(), forecastView.getText(),
+            		highView.getText(), lowView.getText());
             
 			
 		}
@@ -202,5 +203,20 @@ public class DetailActivity extends ActionBarActivity {
 			// TODO Auto-generated method stub
 			
 		}
+		
+		@Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            if (null != mLocation) {
+            	outState.putString(LOCATION_KEY, mLocation);
+        } 
+        }
+		@Override
+		public void onResume() {
+			super.onResume();
+			if (null != mLocation && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
+				getLoaderManager().restartLoader(DETAIL_LOADER, null, null);
+			}
+    }
     }
 }
