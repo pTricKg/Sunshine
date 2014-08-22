@@ -1,8 +1,11 @@
 package com.pTricKg.sunshine;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
@@ -57,7 +60,7 @@ public class DetailActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class DetailFragment extends Fragment {
+    public static class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
@@ -66,6 +69,15 @@ public class DetailActivity extends ActionBarActivity {
 
         public DetailFragment() {
             setHasOptionsMenu(true);
+        }
+        
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+            if (savedInstanceState != null) {
+                mLocation = savedInstanceState.getString(LOCATION_KEY);
+            }
+            super.onActivityCreated(savedInstanceState);
         }
 
         @Override
@@ -113,5 +125,23 @@ public class DetailActivity extends ActionBarActivity {
                     mForecastStr + FORECAST_SHARE_HASHTAG);
             return shareIntent;
         }
+
+		@Override
+		public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onLoaderReset(Loader<Cursor> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
     }
 }
