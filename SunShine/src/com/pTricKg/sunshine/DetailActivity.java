@@ -71,6 +71,8 @@ public class DetailActivity extends ActionBarActivity {
 
         private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
 
+		private static final Cursor data = null;
+
         private ShareActionProvider mShareActionProvider;
         private String mLocation;
         private String mForecast;
@@ -167,39 +169,31 @@ public class DetailActivity extends ActionBarActivity {
 		}
 
 		@Override
-		public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+		public void onLoadFinished(Loader<Cursor> ooader, Cursor data) {
 			// TODO Auto-generated method stub
 			if (!data.moveToFirst()) { return; }
 
             String dateString = Utility.formatDate(
-                    data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT)));
-            ((TextView) getView().findViewById(R.id.detail_date_textview))
-                    .setText(dateString);
-
-            String weatherDescription =
-                    data.getString(data.getColumnIndex(WeatherEntry.COLUMN_SHORT_DESC));
-            ((TextView) getView().findViewById(R.id.detail_forecast_textview))
-                    .setText(weatherDescription);
+                    data.getString(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT)));
+            String description =
+                    data.getString(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC));
+            double high = data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
+            double low =  data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
 
             boolean isMetric = Utility.isMetric(getActivity());
 
-            String high = Utility.formatTemperature(
-                    data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP)), isMetric);
-            ((TextView) getView().findViewById(R.id.detail_high_textview)).setText(high);
-
-            String low = Utility.formatTemperature(
-                    data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP)), isMetric);
-            ((TextView) getView().findViewById(R.id.detail_low_textview)).setText(low);
-
-            // We still need this for the share intent
-            mForecast = String.format("%s - %s - %s/%s", dateString, weatherDescription, high, low);
-
-            Log.v(LOG_TAG, "Forecast String: " + mForecast);
-
-            // If onCreateOptionsMenu has already happened, we need to update the share intent now.
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }
+            TextView dateView = (TextView) getView().findViewById(R.id.detail_date_textview);
+            TextView forecastView = (TextView) getView().findViewById(R.id.detail_forecast_textview);
+            TextView highView = (TextView) getView().findViewById(R.id.detail_high_textview);
+            TextView lowView = (TextView) getView().findViewById(R.id.detail_low_textview);
+            
+            dateView.setText(Utility.formatDate(dateString));
+            forecastView.setText(description);
+            highView.setText(Utility.formatTemperature(high, isMetric)+ "\u00B0");
+            lowView.setText(Utility.formatTemperature(low, isMetric) + "\u00B0");
+            
+            
+            
 			
 		}
 
