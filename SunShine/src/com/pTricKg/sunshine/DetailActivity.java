@@ -1,12 +1,15 @@
 package com.pTricKg.sunshine;
 
+import com.pTricKg.sunshine.data.WeatherContract;
 import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -67,8 +70,13 @@ public class DetailActivity extends ActionBarActivity {
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
         private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
-        private String mForecastStr;
 
+        private ShareActionProvider mShareActionProvider;
+        private String mLocation;
+        private String mForecast;
+        private String mForecastStr;
+        
+        
         public DetailFragment() {
             setHasOptionsMenu(true);
         }
@@ -129,21 +137,69 @@ public class DetailActivity extends ActionBarActivity {
         }
 
 		@Override
-		public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 			
-			String[] columms = {
-			        WeatherEntry.TABLE_NAME + "." + WeatherEntry._ID,
-			        WeatherEntry.COLUMN_DATETEXT,
-			        WeatherEntry.COLUMN_SHORT_DESC,
-			        WeatherEntry.COLUMN_MAX_TEMP,
-			        WeatherEntry.COLUMN_MIN_TEMP,
+			String[] columns = {
+			        WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherEntry._ID,
+			        WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+			        WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
+			        WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+			        WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+			        WeatherContract.WeatherEntry.COLUMN_HUMIDITY,
+			        WeatherContract.WeatherEntry.COLUMN_PRESSURE,
+			        WeatherContract.WeatherEntry.COLUMN_WIND_SPEED,
+			        WeatherContract.WeatherEntry.COLUMN_DEGREES,
+			        WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+			        WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
 			};
-			return null;
+			
+			mLocation = Utility.getPreferredLocation(getActivity());
+			Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(mLocation, DATE_KEY);
+			
+			return new CursorLoader(
+                    getActivity(),
+                    weatherUri,
+                    columns,
+                    null,
+                    null,
+                    null
+            );
 		}
 
 		@Override
 		public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
 			// TODO Auto-generated method stub
+			if (!data.moveToFirst()) { return; }
+
+            String dateString = Utility.formatDate(
+                    data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT)));
+            ((TextView) getView().findViewById(R.id.detail_date_textview))
+                    .setText(dateString);
+
+            String weatherDescription =
+                    data.getString(data.getColumnIndex(WeatherEntry.COLUMN_SHORT_DESC));
+            ((TextView) getView().findViewById(R.id.detail_forecast_textview))
+                    .setText(weatherDescription);
+
+            boolean isMetric = Utility.isMetric(getActivity());
+
+            String high = Utility.formatTemperature(
+                    data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP)), isMetric);
+            ((TextView) getView().findViewById(R.id.detail_high_textview)).setText(high);
+
+            String low = Utility.formatTemperature(
+                    data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP)), isMetric);
+            ((TextView) getView().findViewById(R.id.detail_low_textview)).setText(low);
+
+            // We still need this for the share intent
+            mForecast = String.format("%s - %s - %s/%s", dateString, weatherDescription, high, low);
+
+            Log.v(LOG_TAG, "Forecast String: " + mForecast);
+
+            // If onCreateOptionsMenu has already happened, we need to update the share intent now.
+            if (mShareActionProvider != null) {
+                mShareActionProvider.setShareIntent(createShareForecastIntent());
+            }
 			
 		}
 
