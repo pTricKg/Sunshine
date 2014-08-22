@@ -1,5 +1,7 @@
 package com.pTricKg.sunshine;
 
+import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,7 +23,7 @@ import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
 		
-	public static final int DETAIL_LOADER = o;
+	public static final int DETAIL_LOADER = 0;
 	public static final String DATE_KEY = "forecast_date";
     private static final String LOCATION_KEY = "location";
 	
@@ -74,11 +76,11 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             getLoaderManager().initLoader(DETAIL_LOADER, null, this);
-            if (savedInstanceState != null) {
-                mLocation = savedInstanceState.getString(LOCATION_KEY);
-            }
-            super.onActivityCreated(savedInstanceState);
-        }
+//            if (savedInstanceState != null) {
+//                mLocation = savedInstanceState.getString(LOCATION_KEY);
+//            }
+//            super.onActivityCreated(savedInstanceState);
+      }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,7 +130,14 @@ public class DetailActivity extends ActionBarActivity {
 
 		@Override
 		public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-			// TODO Auto-generated method stub
+			
+			String[] columms = {
+			        WeatherEntry.TABLE_NAME + "." + WeatherEntry._ID,
+			        WeatherEntry.COLUMN_DATETEXT,
+			        WeatherEntry.COLUMN_SHORT_DESC,
+			        WeatherEntry.COLUMN_MAX_TEMP,
+			        WeatherEntry.COLUMN_MIN_TEMP,
+			};
 			return null;
 		}
 
