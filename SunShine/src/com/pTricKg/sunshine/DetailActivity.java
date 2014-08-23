@@ -15,6 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * 
+ * @author ptrickg
+ *
+ *  Presents detail view of weather upon click on day in main
+ *  Activity.
+ *  
+ */
 
 public class DetailActivity extends ActionBarActivity {
 
