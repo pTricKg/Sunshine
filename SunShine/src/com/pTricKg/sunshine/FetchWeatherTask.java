@@ -27,6 +27,15 @@ import com.pTricKg.sunshine.data.WeatherContract;
 import com.pTricKg.sunshine.data.WeatherContract.LocationEntry;
 import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
 
+/**
+ * 
+ * @author ptrickg
+ *
+ *  This is the meat and potatoes of getting 
+ *  weather data from DB.
+ *
+ */
+
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
