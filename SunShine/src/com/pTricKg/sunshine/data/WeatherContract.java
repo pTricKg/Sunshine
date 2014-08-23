@@ -10,6 +10,8 @@ import android.provider.BaseColumns;
 
 /**
  * Defines table and column names for the weather database.
+ * 
+ * WORD
  */
 public class WeatherContract {
 	
