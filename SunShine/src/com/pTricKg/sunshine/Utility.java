@@ -9,6 +9,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+
+/**
+ * 
+ * @author ptrickg
+ *
+ *  Helper methods
+ *
+ */
  
 public class Utility {
     public static String getPreferredLocation(Context context) {
