@@ -175,7 +175,7 @@ public class ForecastFragment extends Fragment implements
 									Utility.formatTemperature(cursor.getDouble(COL_WEATHER_MIN_TEMP), isMetric));
 									
 					Intent intent = new Intent(getActivity(), DetailActivity.class)
-							.putExtra(Intent.EXTRA_TEXT, forecast);
+							.putExtra(DetailActivity.DATE_KEY, cursor.getString(COL_WEATHER_DATE));
 					startActivity(intent);
 									
 				}
