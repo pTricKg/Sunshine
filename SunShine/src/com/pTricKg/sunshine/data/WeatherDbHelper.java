@@ -9,6 +9,8 @@ import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
 
 /**
  * Manages a local database for weather data.
+ * 
+ * Whooha
  */
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
