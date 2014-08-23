@@ -9,6 +9,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
+/**
+ * 
+ * @author ptrickg
+ *
+ * Pertinents for weather queries.
+ */
+
 public class WeatherProvider extends ContentProvider {
 
 	// add constants to help uri querys
