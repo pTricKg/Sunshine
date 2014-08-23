@@ -10,6 +10,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * 
+ * @author ptrickg
+ *
+ *  And so it begins.  THE WEATHER APP.
+ */
+
 public class MainActivity extends ActionBarActivity {
 
 	private static final String LOG_TAG = null;
