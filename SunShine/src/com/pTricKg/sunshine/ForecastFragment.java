@@ -2,6 +2,7 @@ package com.pTricKg.sunshine;
 
 import java.util.Date;
 
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -166,7 +167,7 @@ public class ForecastFragment extends Fragment implements
 					int i, long l) {
 				//String forecast = mForecastAdapter.getItem(i); // pull from adapter
 				//Toast.makeText(getActivrootView., forecast, Toast.LENGTH_LONG).show();
-				SimpleCursorAdapter adapter = (SimpleCursorAdapter) adapterView.getAdapter();
+				ForecastAdapter adapter = (ForecastAdapter) adapterView.getAdapter();
 				Cursor cursor = adapter.getCursor();
 				if (null != cursor && cursor.moveToPosition(i)) {
 					boolean isMetric = Utility.isMetric(getActivity());
