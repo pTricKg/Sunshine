@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -27,13 +28,7 @@ public class Utility {
                 context.getString(R.string.pref_location_default));
     }
 
-    public static boolean isMetric(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(context.getString(R.string.pref_temp_units_key),
-                context.getString(R.string.pref_temp_units_metric))
-                .equals(context.getString(R.string.pref_temp_units_metric));
-    }
-
+   
     static String formatTemperature(double temperature, boolean isMetric) {
         double temp;
         if ( !isMetric ) {
