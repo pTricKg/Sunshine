@@ -1,12 +1,14 @@
 package com.pTricKg.sunshine;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
  
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts
@@ -49,9 +51,13 @@ public class ForecastAdapter extends CursorAdapter {
         // Read high temperature from cursor
         float high = cursor.getFloat(ForecastFragment.COL_WEATHER_MAX_TEMP);
         // TODO: Find TextView and set formatted high temperature on it
- 
+        TextView highView = (TextView) view.findViewById(R.id.list_item_high_textview);
+        highView.setText(Utility.formatTemperature(high, isMetric));
+        
         // Read low temperature from cursor
         float low = cursor.getFloat(ForecastFragment.COL_WEATHER_MIN_TEMP);
         // TODO: Find TextView and set formatted low temperature on it
+        TextView lowView = (TextView) view.findViewById(R.id.list_item_low_textview);
+        lowView.setText(Utility.formatTemperature(low, isMetric));
     }
 }
