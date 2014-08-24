@@ -361,6 +361,7 @@ int string action_refresh 0x7f0b0011
 int string action_settings 0x7f0b000e
 int string action_share 0x7f0b0010
 int string app_name 0x7f0b000d
+int string format_full_friendly_date 0x7f0b0021
 int string pref_location_default 0x7f0b001a
 int string pref_location_key 0x7f0b0018
 int string pref_location_label 0x7f0b0014
@@ -374,6 +375,8 @@ int string pref_temp_units_metric 0x7f0b001c
 int string somedumbstring 0x7f0b001e
 int string title_activity_detail 0x7f0b0012
 int string title_activity_settings 0x7f0b0013
+int string today 0x7f0b001f
+int string tomorrow 0x7f0b0020
 int style AppBaseTheme 0x7f0c0083
 int style AppTheme 0x7f0c0084
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0c0063

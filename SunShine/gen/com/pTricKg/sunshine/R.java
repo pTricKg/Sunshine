@@ -1190,6 +1190,9 @@ containing a value of this type.
     
          */
         public static final int app_name=0x7f0b000d;
+        /**  Date format for displaying day of week and date (i.e. Mon Jun 1) [CHAR LIMIT=20] 
+         */
+        public static final int format_full_friendly_date=0x7f0b0021;
         /**  Default postal code for location preference [CHAR LIMIT=NONE] 
          */
         public static final int pref_location_default=0x7f0b001a;
@@ -1206,7 +1209,7 @@ containing a value of this type.
         /**  Key for temp unit pref in SharedPreferences 
          */
         public static final int pref_temp_units_key=0x7f0b0019;
-        /**   _Label for temp pref
+        /**  _Label for temp pref 
          */
         public static final int pref_temp_units_label=0x7f0b0015;
         /**  Label for imperial option in tempe unit pref 
@@ -1221,6 +1224,13 @@ containing a value of this type.
         public static final int somedumbstring=0x7f0b001e;
         public static final int title_activity_detail=0x7f0b0012;
         public static final int title_activity_settings=0x7f0b0013;
+        /**  Remember to set the root element of strings.xml to be <resources xmlns:xliff="http://schemas.android.com/apk/res-auto"> so it recognizes the xliff tags 
+ Date label when displaying today's weather forecast [CHAR LIMIT=20] 
+         */
+        public static final int today=0x7f0b001f;
+        /**  Date label when displaying tomorrow's weather forecast [CHAR LIMIT=20] 
+         */
+        public static final int tomorrow=0x7f0b0020;
     }
     public static final class style {
         /** 
