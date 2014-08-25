@@ -122,7 +122,7 @@ public class Utility {
                  return context.getString(R.string.tomorrow);
              } else {
                  // Otherwise, the format is just the day of the week (e.g "Wednesday".
-                 SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+                 SimpleDateFormat dayFormat = new SimpleDateFormat("EEE MMM dd");
                  return dayFormat.format(inputDate);
              }
          }
