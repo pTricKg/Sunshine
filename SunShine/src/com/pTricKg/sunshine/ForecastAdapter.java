@@ -13,6 +13,8 @@ import android.widget.TextView;
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts from a
  * {@link Cursor} to a {@link ListView}.
+ * 
+ * FRACK THIS SHOOTSS
  */
 public class ForecastAdapter extends CursorAdapter {
 
