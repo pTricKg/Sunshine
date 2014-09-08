@@ -30,7 +30,7 @@ import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
  * Encapsulates fetching the forecast and displaying it as a {@link ListView}
  * layout.
  * 
- * WHOOOWEEE
+ * WHOOOWEEE  hoo heee
  */
 public class ForecastFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {
