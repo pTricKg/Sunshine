@@ -16,6 +16,8 @@ import android.preference.PreferenceManager;
  * 
  * you know what
  * 
+ * didnt even
+ * 
  */
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
