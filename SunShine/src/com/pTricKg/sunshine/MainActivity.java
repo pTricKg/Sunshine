@@ -15,6 +15,8 @@ import android.view.MenuItem;
  * @author ptrickg
  *
  *  And so it begins.  THE WEATHER APP.
+ *  
+ *  MAIN THis
  */
 
 public class MainActivity extends ActionBarActivity {

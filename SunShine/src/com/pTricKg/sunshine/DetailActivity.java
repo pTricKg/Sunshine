@@ -29,6 +29,8 @@ import android.widget.TextView;
  *
  *  Detail response to click on a given day
  *  in main activty.
+ *  
+ *  doh
  *
  */
 

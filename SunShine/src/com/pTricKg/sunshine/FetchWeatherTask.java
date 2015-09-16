@@ -33,6 +33,8 @@ import com.pTricKg.sunshine.data.WeatherContract.WeatherEntry;
  *
  *  This is the meat and potatoes of getting 
  *  weather data from DB.
+ *  
+ *  BRAAAIIIINNNNNSSSSS!!!!!
  *
  */
 
